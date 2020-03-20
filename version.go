@@ -27,46 +27,6 @@ var VersionPattern = `^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d
 
 // See `go doc time.Parse` for formatting convention.
 var (
-	// DateFormat defines the recognized date string formats, parsed in order of
-	// of decreasing precedence.
-	DateFormat = []string{
-		`2006 Jan 2`,
-		`2006-Jan-2`,
-		`2006-1-2`,
-		`2006 1 2`,
-		`1-2-2006`,
-		`1/2/2006`,
-
-		`Jan 2, 2006`,
-
-		`06 Jan 2`,
-		`06-Jan-2`,
-		`06-1-2`,
-		`06 1 2`,
-		`1-2-06`,
-		`1/2/06`,
-
-		`Jan 2, 06`,
-	}
-
-	// TimeFormat defines the recognized time string formats, parsed in order of
-	// of decreasing precedence.
-	TimeFormat = []string{
-		`15:04:05`,
-
-		`03:04:05PM`,
-		`03:04:05pm`,
-		`3:04:05PM`,
-		`3:04:05pm`,
-
-		`15:04`,
-
-		`03:04PM`,
-		`03:04pm`,
-		`3:04PM`,
-		`3:04pm`,
-	}
-
 	// DateTimeFormat defines the format used to write the date-time of a version
 	// change; the output format string.
 	DateTimeFormat = time.RFC1123
@@ -82,14 +42,48 @@ type Change struct {
 }
 
 // ParseDate parses the given date-time string. It attempts every permutation of
-// each DateFormat and TimeFormat pair (in either order), returning the first
+// each dateFormat and timeFormat pair (in either order), returning the first
 // successfully-parsed time.Time object. If none of the pairs are successful,
-// each DateFormat (ignoring TimeFormat) is then attempted. Finally, each of the
+// each dateFormat (ignoring timeFormat) is then attempted. Finally, each of the
 // standard formats provided by the time package are attempted.
 func ParseDate(date string) *time.Time {
 	if "" != date {
-		for _, fd := range DateFormat {
-			for _, ft := range TimeFormat {
+		dateFormat := []string{
+			`2006 Jan 2`,
+			`2006-Jan-2`,
+			`2006-1-2`,
+			`2006 1 2`,
+			`1-2-2006`,
+			`1/2/2006`,
+
+			`Jan 2, 2006`,
+
+			`06 Jan 2`,
+			`06-Jan-2`,
+			`06-1-2`,
+			`06 1 2`,
+			`1-2-06`,
+			`1/2/06`,
+
+			`Jan 2, 06`,
+		}
+		timeFormat := []string{
+			`15:04:05`,
+
+			`03:04:05PM`,
+			`03:04:05pm`,
+			`3:04:05PM`,
+			`3:04:05pm`,
+
+			`15:04`,
+
+			`03:04PM`,
+			`03:04pm`,
+			`3:04PM`,
+			`3:04pm`,
+		}
+		for _, fd := range dateFormat {
+			for _, ft := range timeFormat {
 				dt := fmt.Sprintf("%s %s", fd, ft)
 				if t, err := time.Parse(dt, date); nil == err {
 					return &t
@@ -100,7 +94,7 @@ func ParseDate(date string) *time.Time {
 				}
 			}
 		}
-		for _, fd := range DateFormat {
+		for _, fd := range dateFormat {
 			if t, err := time.Parse(fd, date); nil == err {
 				return &t
 			}
