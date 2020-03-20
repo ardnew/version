@@ -1,11 +1,18 @@
+[docimg]:https://godoc.org/github.com/ardnew/version?status.svg
+[docurl]:https://godoc.org/github.com/ardnew/version
+
 # version
 ### Go module to easily embed semantic versioning compliance with change history
+
+[![GoDoc][docimg]][docurl]
 
 Note that this module is _not designed to parse and compare semantic versions_. There is [much better software](https://github.com/Masterminds/semver) designed for that task.
 
 The goal is to provide a consistent interface for defining and reporting the version and changes of a Go package.
 
 ## Usage
+See the [documentation][docurl] for example.
+
 Simply defining the global `ChangeLog` variable will conveniently record work history and doubles as package version definition. No function calls required. Similar to `godoc`, it's as simple to use as good comments.
 
 Alternatively, you can just call `Set()` to set package version.
