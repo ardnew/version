@@ -11,18 +11,21 @@ func init() {
 	// is used as the current version of this package.
 	version.ChangeLog = []version.Change{
 		{
+			Package: "mypkg",
 			Version: "0.1.0",
 			Date:    "Feb 26, 2020", // very many date-time formats recognized
 			Description: []string{
 				`initial commit`,
 			},
 		}, {
+			Package: "mypkg",
 			Version: "0.1.0+fqt",
 			Title:   "Formal Test",
 			Description: []string{
 				`update user manual`,
 			},
 		}, {
+			Package: "mypkg",
 			Version: "0.2.0-beta+red",
 			Title:   "Red Label",
 			Date:    "20-Mar-9 17:45:23",
@@ -49,17 +52,17 @@ func Example() {
 	// !! using ChangeLog version "0.2.0-beta+red"
 	//
 	// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-	//  version 0.1.0                                    Wed, 26 Feb 2020 00:00:00 UTC
+	//  mypkg version 0.1.0                              Wed, 26 Feb 2020 00:00:00 UTC
 	// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 	//   initial commit
 	//
 	// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-	//  version 0.1.0+fqt - Formal Test
+	//  mypkg version 0.1.0+fqt - "Formal Test"
 	// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 	//   update user manual
 	//
 	// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-	//  version 0.2.0-beta+red - Red Label               Mon, 09 Mar 2020 17:45:23 UTC
+	//  mypkg version 0.2.0-beta+red - "Red Label"       Mon, 09 Mar 2020 17:45:23 UTC
 	// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 	//   add feature: Dude
 	//   fix bug: Sweet

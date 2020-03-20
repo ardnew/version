@@ -74,6 +74,7 @@ var (
 
 // Change represents the details of a version change.
 type Change struct {
+	Package     string
 	Version     string
 	Title       string
 	Date        string
@@ -144,11 +145,15 @@ func (c *Change) String() string {
 
 	// construct the "version - title" left-hand side
 	vsb := strings.Builder{}
+	if "" != c.Package {
+		vsb.WriteString(c.Package)
+		vsb.WriteRune(' ')
+	}
 	vsb.WriteString("version ")
 	vsb.WriteString(c.Version)
 	if "" != c.Title {
 		vsb.WriteString(" - ")
-		vsb.WriteString(c.Title)
+		fmt.Fprintf(&vsb, "%q", c.Title)
 	}
 
 	// construct the "date" right-hand side
@@ -166,9 +171,9 @@ func (c *Change) String() string {
 	// construct the header containing horizontal lines, version, title, and date
 	b := strings.Builder{}
 	b.WriteString(horizLine)
-	b.WriteString(fmt.Sprintf("%*s%s", titlePad, "", vsb.String()))
+	fmt.Fprintf(&b, "%*s%s", titlePad, "", vsb.String())
 	if dsb.Len() > 0 {
-		b.WriteString(fmt.Sprintf("%*s%s", middlePad, "", dsb.String()))
+		fmt.Fprintf(&b, "%*s%s", middlePad, "", dsb.String())
 	}
 	b.WriteRune('\n')
 	b.WriteString(horizLine)
