@@ -37,16 +37,16 @@ func init() {
 func Example() {
 
 	// show that we are currently using the last entry in ChangeLog
-	fmt.Printf("using ChangeLog version %q\n\n", version.String())
+	fmt.Printf("!! using ChangeLog version %q\n\n", version.String())
 
 	// print a pretty changelog to stdout.
-	version.PrintChanges()
+	version.PrintChangeLog()
 
 	version.Set("0.1.4")
-	fmt.Printf("set version to %q\n\n", version.String())
+	fmt.Printf("!! set version to %q\n\n", version.String())
 
 	// Output:
-	// using ChangeLog version "0.2.0-beta+red"
+	// !! using ChangeLog version "0.2.0-beta+red"
 	//
 	// ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 	//  version 0.1.0                                    Wed, 26 Feb 2020 00:00:00 UTC
@@ -64,5 +64,6 @@ func Example() {
 	//   add feature: Dude
 	//   fix bug: Sweet
 	//
-	// set version to "0.1.4"
+	// !! set version to "0.1.4"
+	//
 }

@@ -1,7 +1,6 @@
 # version
-##### Go module to easily embed semantic versioning compliance with change history
+### Go module to easily embed semantic versioning compliance with change history
 
-#### Purpose
 Note that this module is _not designed to parse and compare semantic versions_. There is [much better software](https://github.com/Masterminds/semver) designed for that task.
 
 The goal is to provide a consistent interface for defining and reporting the version and changes of a Go package.

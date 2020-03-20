@@ -161,14 +161,16 @@ func (c *Change) String() string {
 	middlePad := maxWidth - ((vsb.Len() + titlePad) + (dsb.Len() + titlePad))
 
 	// horizontal line used for containing the header
-	horizLine := fmt.Sprintln(runeRepeat('―', maxWidth))
+	horizLine := runeRepeat('―', maxWidth) + "\n"
 
 	// construct the header containing horizontal lines, version, title, and date
 	b := strings.Builder{}
 	b.WriteString(horizLine)
-	fmt.Fprintf(&b, "%*s%s%*s%s\n",
-		titlePad, "", vsb.String(), middlePad, "", dsb.String(),
-	)
+	b.WriteString(fmt.Sprintf("%*s%s", titlePad, "", vsb.String()))
+	if dsb.Len() > 0 {
+		b.WriteString(fmt.Sprintf("%*s%s", middlePad, "", dsb.String()))
+	}
+	b.WriteRune('\n')
 	b.WriteString(horizLine)
 
 	// append each description line with indentation
@@ -248,9 +250,9 @@ func String() string {
 	return ""
 }
 
-// FprintChanges writes to the given io.Writer all of the entries in ChangeLog.
+// FprintChangeLog writes to given io.Writer w all of the entries in ChangeLog.
 // Panics if any of the entries have invalid version strings.
-func FprintChanges(w io.Writer) {
+func FprintChangeLog(w io.Writer) {
 	if nil != ChangeLog {
 		for _, c := range ChangeLog {
 			fmt.Fprintf(w, "%s\n", c.String())
@@ -260,6 +262,6 @@ func FprintChanges(w io.Writer) {
 
 // PrintChanges writes to stdout all of the entries in ChangeLog.
 // Panics if any of the entries have invalid version strings.
-func PrintChanges() {
-	FprintChanges(os.Stdout)
+func PrintChangeLog() {
+	FprintChangeLog(os.Stdout)
 }
