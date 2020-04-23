@@ -249,10 +249,10 @@ func String() string {
 	return ""
 }
 
-// FprintVersion writes to given io.Writer w a descriptive version string.
+// FprintPackageVersion writes to given io.Writer w a descriptive version string.
 // Includes the package name if defined in ChangeLog.
 // Panics if any of the version components are invalid.
-func FprintVersion(w io.Writer) {
+func FprintPackageVersion(w io.Writer) {
 	b := strings.Builder{}
 	// include package name if defined in the ChangeLog
 	if nil != ChangeLog && len(ChangeLog) > 0 {
@@ -272,11 +272,11 @@ func FprintVersion(w io.Writer) {
 	}
 }
 
-// PrintVersion writes to stdout a descriptive version string.
+// PrintPackageVersion writes to stdout a descriptive version string.
 // Includes the package name if defined in ChangeLog.
 // Panics if any of the version components are invalid.
-func PrintVersion() {
-	FprintVersion(os.Stdout)
+func PrintPackageVersion() {
+	FprintPackageVersion(os.Stdout)
 }
 
 // FprintChangeLog writes to given io.Writer w all of the entries in ChangeLog.
