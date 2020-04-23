@@ -249,6 +249,36 @@ func String() string {
 	return ""
 }
 
+// FprintVersion writes to given io.Writer w a descriptive version string.
+// Includes the package name if defined in ChangeLog.
+// Panics if any of the version components are invalid.
+func FprintVersion(w io.Writer) {
+	b := strings.Builder{}
+	// include package name if defined in the ChangeLog
+	if nil != ChangeLog && len(ChangeLog) > 0 {
+		if pkg := ChangeLog[len(ChangeLog)-1].Package; "" != pkg {
+			b.WriteString(pkg)
+		}
+	}
+	if ver := String(); "" != ver {
+		if b.Len() > 0 {
+			b.WriteRune(' ')
+		}
+		b.WriteString("version ")
+		b.WriteString(ver)
+	}
+	if b.Len() > 0 {
+		fmt.Fprintf(w, "%s\n", b.String())
+	}
+}
+
+// PrintVersion writes to stdout a descriptive version string.
+// Includes the package name if defined in ChangeLog.
+// Panics if any of the version components are invalid.
+func PrintVersion() {
+	FprintVersion(os.Stdout)
+}
+
 // FprintChangeLog writes to given io.Writer w all of the entries in ChangeLog.
 // Panics if any of the entries have invalid version strings.
 func FprintChangeLog(w io.Writer) {
@@ -259,7 +289,7 @@ func FprintChangeLog(w io.Writer) {
 	}
 }
 
-// PrintChanges writes to stdout all of the entries in ChangeLog.
+// PrintChangeLog writes to stdout all of the entries in ChangeLog.
 // Panics if any of the entries have invalid version strings.
 func PrintChangeLog() {
 	FprintChangeLog(os.Stdout)
