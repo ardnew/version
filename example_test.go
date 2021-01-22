@@ -28,7 +28,7 @@ func init() {
 			Package: "mypkg",
 			Version: "0.2.0-beta+red",
 			Title:   "Red Label",
-			Date:    "20-Mar-9 17:45:23",
+			Date:    "20-March-9 17:45:23",
 			Description: []string{
 				`add feature: Dude`,
 				`fix bug: Sweet`,
